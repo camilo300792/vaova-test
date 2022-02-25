@@ -28,8 +28,8 @@ class HotelCollection:
         self.connect()
 
         hotel = self.__collection.insert_one({
-            "name": helpers.contain_numbers(data['name']), 
-            "city": helpers.ontain_numbers(data['city']), 
+            "name": helpers.contain_numbers(data['name'], 'Name'), 
+            "city": helpers.contain_numbers(data['city'], 'City'), 
             "address": data['address'], 
             "email": data['email'], 
             "image": data['image'],
