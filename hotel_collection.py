@@ -1,6 +1,7 @@
 from dbclient import DBClient
 from bson import ObjectId
 import datetime
+import helpers
 
 
 
@@ -27,8 +28,8 @@ class HotelCollection:
         self.connect()
 
         hotel = self.__collection.insert_one({
-            "name": data['name'], 
-            "city": data['city'], 
+            "name": helpers.contain_numbers(data['name']), 
+            "city": helpers.ontain_numbers(data['city']), 
             "address": data['address'], 
             "email": data['email'], 
             "image": data['image'],

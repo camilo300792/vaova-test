@@ -1,12 +1,11 @@
 import re
 
-VALID_TITLE_REGEX = r'\d'
 VALID_URL_REGEX = r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)'
-VALID_EMAIL_REGEX = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
+VALID_EMAIL_REGEX = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
 def contain_numbers(string):
-    if (re.fullmatch(VALID_TITLE_REGEX, string)):
-        raise Exception('Invalid format string!');
+    if (re.search(r'\d', string)):
+        raise Exception("String can't contain numbers");
     return string
 
 def valid_url(url):
@@ -15,6 +14,6 @@ def valid_url(url):
     return url
 
 def valid_email(email):
-    if (re.fullmatch(VALID_EMAIL_REGEX, email)):
+    if (re.fullmatch(VALID_EMAIL_REGEX, email) is False):
         raise Exception('Invalid email!');
     return email

@@ -14,8 +14,11 @@ def hotels():
     collection = HotelCollection()
     
     if request.method == 'POST':
-        insert_id = collection.write(request.json)
-        return jsonify({"hotel_id": insert_id}), 201
+        try:
+            insert_id = collection.write(request.json)
+            return jsonify({"hotel_id": insert_id}), 201
+        except Exception as e:
+            return jsonify({"message": str(e)}), 404
 
     name = request.args.get('name')
     hotels = collection.read(name=name)
@@ -26,14 +29,6 @@ def delete(hotel_id):
     collection = HotelCollection()
     collection.delete(hotel_id)
     return Response(status=204)
-
-@app.route('/test', methods=["GET"])
-def test_validate():
-    title = helpers.contain_numbers('Camilo1234')
-    if (title):
-        return jsonify({"is_valid": True})
-    else:
-        return jsonify({"is_valid": False})
 
 
 
